@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -10,7 +9,8 @@ require('dotenv').config();
 
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
-const { sequelize} = require('./models');
+const postRouter = require('./routes/post');
+const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
@@ -41,6 +41,7 @@ app.use(passport.session());
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
